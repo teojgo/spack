@@ -26,28 +26,23 @@ from glob import glob
 from sphinx.ext.apidoc import main as sphinx_apidoc
 
 # -- Spack customizations -----------------------------------------------------
-# root of the spack installation for apidoc
-spack_root = '../../..'
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath(
-    os.path.join(spack_root, 'lib/spack/external')))
+sys.path.insert(0, os.path.abspath('_spack_root/lib/spack/external'))
 
 if sys.version_info[0] < 3:
-    sys.path.insert(0, os.path.abspath(
-        os.path.join(spack_root, 'lib/spack/external/yaml/lib')))
+    sys.path.insert(
+        0, os.path.abspath('_spack_root/lib/spack/external/yaml/lib'))
 else:
-    sys.path.insert(0, os.path.abspath(
-        os.path.join(spack_root, 'lib/spack/external/yaml/lib3')))
+    sys.path.insert(
+        0, os.path.abspath('_spack_root/lib/spack/external/yaml/lib3'))
 
-sys.path.append(os.path.abspath(
-    os.path.join(spack_root, 'lib/spack/')))
+sys.path.append(os.path.abspath('_spack_root/lib/spack/'))
 
 # Add the Spack bin directory to the path so that we can use its output in docs.
-os.environ['SPACK_ROOT'] = spack_root
-os.environ['PATH'] += '%s%s/bin' % (os.pathsep, spack_root)
+os.environ['SPACK_ROOT'] = os.path.abspath('_spack_root')
+os.environ['PATH'] += "%s%s" % (os.pathsep, os.path.abspath('_spack_root/bin'))
 
 # Set an environment variable so that colify will print output like it would to
 # a terminal.
@@ -78,8 +73,8 @@ apidoc_args = [
     '--no-toc',        # Don't create a table of contents file
     '--output-dir=.',  # Directory to place all output
 ]
-sphinx_apidoc(apidoc_args + [os.path.join(spack_root, 'lib/spack/spack')])
-sphinx_apidoc(apidoc_args + [os.path.join(spack_root, 'lib/spack/llnl')])
+sphinx_apidoc(apidoc_args + ['_spack_root/lib/spack/spack'])
+sphinx_apidoc(apidoc_args + ['_spack_root/lib/spack/llnl'])
 
 # Enable todo items
 todo_include_todos = True
@@ -211,14 +206,12 @@ html_theme_options = { 'logo_only' : True }
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = os.path.join(
-    spack_root, 'share/spack/logo/spack-logo-white-text.svg')
+html_logo = '_spack_root/share/spack/logo/spack-logo-white-text.svg'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = os.path.join(
-    spack_root, 'share/spack/logo/favicon.ico')
+html_favicon = '_spack_root/share/spack/logo/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
